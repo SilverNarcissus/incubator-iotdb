@@ -1401,6 +1401,7 @@ public class StorageGroupProcessor {
       Collections.shuffle(result);
       return result.subList(0, maxResult);
     }
+    
 
     return result;
   }
