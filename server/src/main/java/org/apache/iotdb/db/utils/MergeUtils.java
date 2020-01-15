@@ -282,8 +282,8 @@ public class MergeUtils {
 
     @Override
     public int compareTo(MetaListEntry o) {
-      return Long.compare(this.current().getStartTime(),
-          o.current().getStartTime());
+      return Long.compare(this.current().getOffsetOfChunkHeader(),
+          o.current().getOffsetOfChunkHeader());
     }
 
     public ChunkMetaData current() {

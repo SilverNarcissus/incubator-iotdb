@@ -85,22 +85,20 @@ class MergeFileTask {
     for (TsFileResource seqFile : unmergedFiles) {
       int mergedChunkNum = context.getMergedChunkCnt().getOrDefault(seqFile, 0);
       int unmergedChunkNum = context.getUnmergedChunkCnt().getOrDefault(seqFile, 0);
-      moveUnmergedToNew(seqFile);
-//      if (mergedChunkNum >= unmergedChunkNum) {
-//        // move the unmerged data to the new file
-//        if (logger.isInfoEnabled()) {
-//          logger.info("{} moving unmerged data of {} to the merged file, {} merged chunks, {} "
-//              + "unmerged chunks", taskName, seqFile.getFile().getName(), mergedChunkNum, unmergedChunkNum);
-//        }
-//        moveUnmergedToNew(seqFile);
-//      } else {
-//        // move the merged data to the old file
-//        if (logger.isInfoEnabled()) {
-//          logger.info("{} moving merged data of {} to the old file {} merged chunks, {} "
-//              + "unmerged chunks", taskName, seqFile.getFile().getName(), mergedChunkNum, unmergedChunkNum);
-//        }
-//        moveMergedToOld(seqFile);
-//      }
+      if (mergedChunkNum >= unmergedChunkNum) {
+        // move the unmerged data to the new file
+        if (logger.isInfoEnabled()) {
+          logger.info("{} moving unmerged data of {} to the merged file, {} merged chunks, {} "
+              + "unmerged chunks", taskName, seqFile.getFile().getName(), mergedChunkNum, unmergedChunkNum);
+        }
+        moveUnmergedToNew(seqFile);
+      } else {
+        // move the merged data to the old file
+        if (logger.isInfoEnabled()) {
+          logger.info("{} moving merged data of {} to the old file {} merged chunks, {} "
+              + "unmerged chunks", taskName, seqFile.getFile().getName(), mergedChunkNum, unmergedChunkNum);
+        }
+      }
       cnt ++;
       if (logger.isInfoEnabled()) {
         logger.debug("{} has merged {}/{} files", taskName, cnt, unmergedFiles.size());
